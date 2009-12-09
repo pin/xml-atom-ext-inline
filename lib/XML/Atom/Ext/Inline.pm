@@ -32,7 +32,7 @@ BEGIN {
 
 sub element_ns {
 	return XML::Atom::Namespace->new(
-		'ae' => q{http://dp-net.com/ae}
+		'ae' => q{http://purl.org/atom/ext/}
 	);
 }
 
@@ -40,15 +40,17 @@ sub element_name {'inline'}
 
 =head1 SYNOPSIS
 
-Quick summary of what the module does.
+This module implements In-lining extesions for Atom. You can see the RFC draft
+here: L<http://tools.ietf.org/html/draft-mehta-atom-inline-01>
 
-Perhaps a little code snippet.
+The following code:
 
 	use XML::Atom;
     use XML::Atom::Ext::Inline;
 
 	my $feed = XML::Atom::Feed->new(Version => '1.0');
     my $parent_feed = XML::Atom::Feed->new(Version => '1.0');
+    $parent_feed->title('foo bar');
 
     my $inline = XML::Atom::Ext::Inline->new();
     $inline->atom($parent_feed);
@@ -59,7 +61,20 @@ Perhaps a little code snippet.
 
     $feed->add_link($link);
     
-    ...
+    $fee->as_xml();
+    
+will produce:
+
+    <?xml version="1.0" encoding="utf-8"?>
+    <feed xmlns="http://www.w3.org/2005/Atom">
+      <link rel="up">
+        <ae:inline xmlns:ae="http://purl.org/atom/ext/">
+          <feed>
+            <title>foo bar</title>
+          </feed>
+        </ae:inline>
+      </link>
+    </feed>
 
 =head1 USAGE
 

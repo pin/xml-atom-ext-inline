@@ -18,3 +18,5 @@ $feed->add_link($link);
 
 isa_ok $inline, 'XML::Atom::Ext::Inline';
 is $feed->link->inline->atom->title, 'foo bar';
+
+#print $feed->as_xml();
