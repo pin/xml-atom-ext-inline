@@ -3,6 +3,43 @@ package XML::Atom::Ext::Inline;
 use warnings;
 use strict;
 
+use base qw(XML::Atom::Base);
+
+use XML::Atom::Link;
+use XML::Atom::Feed;
+use XML::Atom::Entry;
+use XML::Atom::Util qw(childlist);
+
+use Carp;
+
+sub atom {
+	my $obj = shift;
+	if (@_) {
+		if ($_[0]->isa('XML::Atom::Feed')) {
+			my ($feed) = @_;
+			my $ns_uri = $feed->{ns};
+			my @elem = childlist($obj->elem, $ns_uri, 'entry');
+			$obj->elem->removeChild($_) for @elem;
+			return $obj->set($ns_uri, 'feed', $feed);
+		}
+		elsif ($_[0]->isa('XML::Atom::Feed')) {
+			my ($entry) = @_;
+			my $ns_uri = $entry->{ns}->{uri};
+			my @elem = childlist($obj->elem, $ns_uri, 'feed');
+			$obj->elem->removeChild($_) for @elem;
+			return $obj->set($ns_uri, 'entry', $entry);			
+		}
+		else {
+			my $r = ref $_[0];
+			carp "can't embed $r - should be XML::Atom::Feed or XML::Atom::Entry";
+		}
+	}
+	else {
+		return $obj->get_object('http://www.w3.org/2005/Atom', 'feed', 'XML::Atom::Feed')
+			|| $obj->get_object('http://www.w3.org/2005/Atom', 'entry', 'XML::Atom::Entry');
+	}
+}
+
 =head1 NAME
 
 XML::Atom::Ext::Inline - The great new XML::Atom::Ext::Inline!
@@ -14,7 +51,6 @@ Version 0.01
 =cut
 
 our $VERSION = '0.01';
-
 
 =head1 SYNOPSIS
 
@@ -38,15 +74,28 @@ if you don't export anything, such as for a purely object-oriented module.
 
 =cut
 
-sub function1 {
+BEGIN {
+	XML::Atom::Link->mk_object_accessor(inline => 'XML::Atom::Ext::Inline');
 }
 
-=head2 function2
+=head1 ATTRIBUTES
 
+=head2 element_ns
+ 
+Returns the L<XML::Atom::Namespace> object representing our
+xmlns:ae="http://purl.org/atom/ext/">.
+
+Do that guys from Oracle are going to make more sane namespace URL and prefix?
+ 
 =cut
-
-sub function2 {
+ 
+sub element_ns {
+	return XML::Atom::Namespace->new(
+		'ae' => q{http://dp-net.com/ae}
+	);
 }
+
+sub element_name {'inline'}
 
 =head1 AUTHOR
 
