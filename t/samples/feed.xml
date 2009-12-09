@@ -2,20 +2,20 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
   <id>test</id>
   <title>test</title>
-  <link href="http://pin.dp-yes.com/photo/" rel="up">
-    <ae:inline xmlns:ae="http://dp-net.com/ae">
+  <link href="http://pin.dp-net.com/photo/" rel="up">
+    <ae:inline xmlns:ae="http://purl.org/atom/ext/">
       <feed>
         <id>foo-bar</id>
         <title>фото</title>
       </feed>
     </ae:inline>
   </link>
-  <link href="http://pin.dp-yes.com/photo/test/la" rel="down">
-    <ae:inline xmlns:ae="http://dp-net.com/ae">
+  <link href="http://pin.dp-net.com/photo/test/la" rel="down">
+    <ae:inline xmlns:ae="http://purl.org/atom/ext/">
       <feed>
         <id>test/la</id>
         <title>la</title>
-        <link href="http://pin.dp-yes.com/photo/test/la/bubu" rel="down">
+        <link href="http://pin.dp-net.com/photo/test/la/bubu" rel="down">
           <ae:inline>
             <feed>
               <id>test/la/bubu</id>

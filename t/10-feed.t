@@ -15,6 +15,8 @@ my $first_link = $feed->link;
 #is scalar @$links, 2;
 isa_ok $first_link, 'XML::Atom::Link';
 
+#print $first_link->as_xml();
+
 my $inline = $first_link->inline;
 isa_ok $inline, 'XML::Atom::Ext::Inline';
 
