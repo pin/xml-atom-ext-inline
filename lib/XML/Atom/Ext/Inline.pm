@@ -48,7 +48,7 @@ The following code:
     use XML::Atom;
     use XML::Atom::Ext::Inline;
 
-	my $feed = XML::Atom::Feed->new(Version => '1.0');
+    my $feed = XML::Atom::Feed->new(Version => '1.0');
     my $parent_feed = XML::Atom::Feed->new(Version => '1.0');
     $parent_feed->title('foo bar');
 
@@ -61,7 +61,7 @@ The following code:
 
     $feed->add_link($link);
     
-    $fee->as_xml();
+    $feed->as_xml();
     
 will produce:
 
@@ -109,6 +109,7 @@ sub atom {
 		else {
 			my $r = ref $_[0];
 			carp "can't embed $r - should be XML::Atom::Feed or XML::Atom::Entry";
+			return;
 		}
 	}
 	else {
