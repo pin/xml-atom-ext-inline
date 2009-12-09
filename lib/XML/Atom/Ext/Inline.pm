@@ -12,6 +12,68 @@ use XML::Atom::Util qw(childlist);
 
 use Carp;
 
+=head1 NAME
+
+XML::Atom::Ext::Inline - In-lining Extensions for Atom
+
+=head1 VERSION
+
+Version 0.01
+
+=cut
+
+our $VERSION = '0.01';
+
+BEGIN {
+	XML::Atom::Link->mk_object_accessor(inline => 'XML::Atom::Ext::Inline');
+	no warnings;
+	*XML::Atom::Link::set = sub {XML::Atom::Base::set(@_)}; # hack to eliminate backwards compatibility hack in XML::Atom::Link
+}
+
+sub element_ns {
+	return XML::Atom::Namespace->new(
+		'ae' => q{http://dp-net.com/ae}
+	);
+}
+
+sub element_name {'inline'}
+
+=head1 SYNOPSIS
+
+Quick summary of what the module does.
+
+Perhaps a little code snippet.
+
+	use XML::Atom;
+    use XML::Atom::Ext::Inline;
+
+	my $feed = XML::Atom::Feed->new(Version => '1.0');
+    my $parent_feed = XML::Atom::Feed->new(Version => '1.0');
+
+    my $inline = XML::Atom::Ext::Inline->new();
+    $inline->atom($parent_feed);
+    
+    my $link = XML::Atom::Link->new(Version => '1.0');
+    $link->rel('up');
+    $link->inline($inline);
+
+    $feed->add_link($link);
+    
+    ...
+
+=head1 USAGE
+
+=head2 atom($feed | $entry)
+
+Returns an I<XML::Atom::Feed> or I<XML::Atom::Entry> object representing the
+inline element contents or C<undef> if there is no contents.
+
+If given an argument, adds the feed I<$feed> which must be an
+I<XML::Atom::Feed> object or I<$entry> which must be I<XML::Atom::Entry>
+object, into inline element.
+
+=cut
+
 sub atom {
 	my $obj = shift;
 	if (@_) {
@@ -40,108 +102,17 @@ sub atom {
 	}
 }
 
-=head1 NAME
-
-XML::Atom::Ext::Inline - The great new XML::Atom::Ext::Inline!
-
-=head1 VERSION
-
-Version 0.01
-
-=cut
-
-our $VERSION = '0.01';
-
-=head1 SYNOPSIS
-
-Quick summary of what the module does.
-
-Perhaps a little code snippet.
-
-    use XML::Atom::Ext::Inline;
-
-    my $foo = XML::Atom::Ext::Inline->new();
-    ...
-
-=head1 EXPORT
-
-A list of functions that can be exported.  You can delete this section
-if you don't export anything, such as for a purely object-oriented module.
-
-=head1 FUNCTIONS
-
-=head2 function1
-
-=cut
-
-BEGIN {
-	XML::Atom::Link->mk_object_accessor(inline => 'XML::Atom::Ext::Inline');
-}
-
-=head1 ATTRIBUTES
-
-=head2 element_ns
- 
-Returns the L<XML::Atom::Namespace> object representing our
-xmlns:ae="http://purl.org/atom/ext/">.
-
-Do that guys from Oracle are going to make more sane namespace URL and prefix?
- 
-=cut
- 
-sub element_ns {
-	return XML::Atom::Namespace->new(
-		'ae' => q{http://dp-net.com/ae}
-	);
-}
-
-sub element_name {'inline'}
-
 =head1 AUTHOR
 
 Dmitri Popov, C<< <operator at cv.dp-net.com> >>
 
 =head1 BUGS
 
-Please report any bugs or feature requests to C<bug-xml-atom-ext-inline at rt.cpan.org>, or through
-the web interface at L<http://rt.cpan.org/NoAuth/ReportBug.html?Queue=XML-Atom-Ext-Inline>.  I will be notified, and then you'll
-automatically be notified of progress on your bug as I make changes.
-
-
-
+Please report bugs here: L<http://github.com/pin/xml-atom-ext-inline/issues>
 
 =head1 SUPPORT
 
-You can find documentation for this module with the perldoc command.
-
-    perldoc XML::Atom::Ext::Inline
-
-
-You can also look for information at:
-
-=over 4
-
-=item * RT: CPAN's request tracker
-
-L<http://rt.cpan.org/NoAuth/Bugs.html?Dist=XML-Atom-Ext-Inline>
-
-=item * AnnoCPAN: Annotated CPAN documentation
-
-L<http://annocpan.org/dist/XML-Atom-Ext-Inline>
-
-=item * CPAN Ratings
-
-L<http://cpanratings.perl.org/d/XML-Atom-Ext-Inline>
-
-=item * Search CPAN
-
-L<http://search.cpan.org/dist/XML-Atom-Ext-Inline>
-
-=back
-
-
-=head1 ACKNOWLEDGEMENTS
-
+You can find more information and usefull links on project wiki: L<http://wiki.github.com/pin/xml-atom-ext-inline>
 
 =head1 COPYRIGHT & LICENSE
 
@@ -149,7 +120,6 @@ Copyright 2009 Dmitri Popov, all rights reserved.
 
 This program is free software; you can redistribute it and/or modify it
 under the same terms as Perl itself.
-
 
 =cut
 
