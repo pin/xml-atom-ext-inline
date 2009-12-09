@@ -45,7 +45,7 @@ here: L<http://tools.ietf.org/html/draft-mehta-atom-inline-01>
 
 The following code:
 
-	use XML::Atom;
+    use XML::Atom;
     use XML::Atom::Ext::Inline;
 
 	my $feed = XML::Atom::Feed->new(Version => '1.0');
