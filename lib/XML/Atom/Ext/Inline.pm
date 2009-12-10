@@ -61,7 +61,7 @@ The following code:
 
     $feed->add_link($link);
     
-    $feed->as_xml();
+    print $feed->as_xml();
     
 will produce:
 
