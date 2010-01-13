@@ -22,7 +22,7 @@ Version 0.01
 
 =cut
 
-our $VERSION = '0.01';
+our $VERSION = '0.01_01';
 
 BEGIN {
 	XML::Atom::Link->mk_object_accessor(inline => 'XML::Atom::Ext::Inline');
@@ -124,7 +124,10 @@ Dmitri Popov, C<< <operator at cv.dp-net.com> >>
 
 =head1 BUGS
 
-Please report bugs here: L<http://github.com/pin/xml-atom-ext-inline/issues>
+It works with Atom version 1.0 only, e.g. you expected using
+XML::Atom::Entry->new(Version => '1.0'), but it's developer version anyway
+
+Please report more bugs here: L<http://github.com/pin/xml-atom-ext-inline/issues>
 
 =head1 SUPPORT
 
