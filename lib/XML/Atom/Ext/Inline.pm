@@ -22,7 +22,7 @@ Version 0.01
 
 =cut
 
-our $VERSION = '0.01_01';
+our $VERSION = '0.01_02';
 
 BEGIN {
 	XML::Atom::Link->mk_object_accessor(inline => 'XML::Atom::Ext::Inline');
