@@ -141,7 +141,7 @@ You can find more information and usefull links on project wiki: L<http://wiki.g
 
 =head1 COPYRIGHT & LICENSE
 
-Copyright 2009 Dmitri Popov, all rights reserved.
+Copyright 2009-2010 Dmitri Popov, all rights reserved.
 
 This program is free software; you can redistribute it and/or modify it
 under the same terms as Perl itself.
