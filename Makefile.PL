@@ -12,6 +12,12 @@ WriteMakefile(
         'Test::More' => 0,
         'XML::Atom' => 0,
     },
+    META_MERGE      => {
+        resources => {
+            bugtracker  =>      'http://github.com/pin/xml-atom-ext-inline/issues',
+            repository  =>      'git://github.com/pin/xml-atom-ext-inline.git',
+        },
+    },
     dist                => { COMPRESS => 'gzip -9f', SUFFIX => 'gz', },
     clean               => { FILES => 'XML-Atom-Ext-Inline-*' },
 );
