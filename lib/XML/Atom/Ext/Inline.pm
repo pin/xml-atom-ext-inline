@@ -133,9 +133,6 @@ Dmitri Popov, C<< <operator at cv.dp-net.com> >>
 
 =head1 BUGS
 
-It works with Atom version 1.0 only, e.g. you expected using
-XML::Atom::Entry->new(Version => '1.0'), but it's developer version anyway
-
 Please report more bugs here: L<http://github.com/pin/xml-atom-ext-inline/issues>
 
 =head1 SUPPORT
