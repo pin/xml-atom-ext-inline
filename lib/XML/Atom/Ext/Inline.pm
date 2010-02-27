@@ -115,7 +115,7 @@ sub atom {
 
 =head2 element_ns
 
-Returns the I<XML::Atom::Namespace> object representing our xmlns:ae="http://purl.org/atom/ext/">.
+Returns the I<XML::Atom::Namespace> object representing our xmlns:ae="http://purl.org/atom/ext/".
 
 =cut
 
